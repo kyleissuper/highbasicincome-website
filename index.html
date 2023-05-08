@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
-    <title>The High Basic Income Project | A moonshot to address inequality</title>
+    <title>The High Basic Income Project | A permanent solution for inequality</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="High Basic Income">
@@ -12,7 +12,7 @@
         text-align: center;
       }
       #social_proof img {
-        height: 50px;
+        height: 45px;
         margin: 10px;
         /*
         filter: grayscale(100%);
@@ -26,7 +26,20 @@
         margin-bottom: 0;
       }
       .container {
-        max-width: 60ch;
+        max-width: 65ch;
+      }
+      #banner button {
+        width: auto;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #banner dialog article {
+        overflow-y: hidden;
+      }
+      #banner iframe {
+        height: Calc(100vh - 150px);
+        aspect-ratio: 9 / 16;
       }
     </style>
   </head>
@@ -39,12 +52,21 @@
     <main class="container">
       <section id="banner">
         <hgroup>
-          <h1>A moonshot to address inequality</h1>
+          <h1>A permanent solution for inequality</h1>
           <h2>$60K/year basic income + support systems</h2>
         </hgroup>
         <p>
+          <button class="contrast" data-target="modal-video" onClick="toggleModal(event)">
+            ▶️ See why
+          </button>
           <a href="https://forms.gle/wqjkuLcgfviXPW5z5" role="button" class="primary">Join our list of supporters</a>
         </p>
+        <dialog id="modal-video">
+          <article>
+            <a href="#close" aria-label="Close" class="close" data-target="modal-video" onClick="toggleModal(event)"></a>
+            <iframe src="https://www.youtube.com/embed/RDAUR0-i864" title="A solution to inequality, supported by everyone from MLK to Nixon. https://highbasicincome.org" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </article>
+        </dialog>
       </section>
       <section>
         <blockquote>
@@ -62,12 +84,13 @@
           <p>Our goal is to reduce inequality by providing 30 randomly selected individuals with $60K/year for 10 years and the necessary resources and support to pursue their personal and professional goals.</p>
         </details>
         <details>
-          <summary>How will you make the program remains financially self-sustaining?</summary>
-          <p>The program will seek initial funding from donors and investors, and then aim to become self-sustaining as successful participants generate revenue, contributing back to the program.</p>
+          <summary>Why do it this way?</summary>
+          <p>We want to build a permanent, long term solution to solve inequality.</p>
+          <p>Economic mobility requires enough financial stability to focus on specialized work, as well as access to opportunities to grow. We provide financial stability through basic income, and opportunities through a network of highly engaged supporters.<p>
         </details>
         <details>
-          <summary>Why do it this way?</summary>
-          <p>Any future with less inequality will be one where we have figured out how to spread out money and opportunities. Our approach is to start with just 30 participants, where the complexity of the problem is more manageable.</p>
+          <summary>How will you make the program remains financially self-sustaining?</summary>
+          <p>The program will seek initial funding from donors and investors, and then aim to become self-sustaining as successful participants generate revenue, contributing back to the program.</p>
         </details>
         <details>
           <summary>How will you select the first 30 participants?</summary>
@@ -108,8 +131,19 @@
           <img src="/img/usc.png">
           <img src="/img/arizona.png">
           <img src="/img/mcgill.png">
+          <img src="/img/sutd.png">
           <img src="/img/stockholm.png">
           <img src="/img/berkeley.png">
+          <img src="/img/hecparis.png">
+          <img src="/img/smu.png">
+          <img src="/img/amherst.png">
+          <img src="/img/northwestern.svg">
+          <img src="/img/ntu.png">
+          <img src="/img/yale.png">
+          <img src="/img/chinaagricultural.png">
+          <img src="/img/boulder.png">
+          <img src="/img/columbia.svg">
+          <img src="/img/penn.jpg">
         </div>
       </section>
       <section id="social_proof">
@@ -129,11 +163,110 @@
           <code>Data and Analytics</code>
           <code>Product Management</code>
           <code>Investment and Wealth Management</code>
+          <code>Corporate Sales</code>
+          <code>Policy Making</code>
+          <code>International Diplomacy</code>
         </div>
       </section>
       <footer class="container">
         <small>&copy; <script>document.write(new Date().getFullYear())</script> The High Basic Income Project</small>
       </footer>
     </main>
+    <script>
+      /*
+       * Modal
+       *
+       * Pico.css - https://picocss.com
+       * Copyright 2019-2023 - Licensed under MIT
+       */
+      
+      // Config
+      const isOpenClass = "modal-is-open";
+      const openingClass = "modal-is-opening";
+      const closingClass = "modal-is-closing";
+      const animationDuration = 400; // ms
+      let visibleModal = null;
+      
+      // Toggle modal
+      const toggleModal = (event) => {
+        event.preventDefault();
+        const modal = document.getElementById(event.currentTarget.getAttribute("data-target"));
+        typeof modal != "undefined" && modal != null && isModalOpen(modal)
+          ? closeModal(modal)
+          : openModal(modal);
+      };
+      
+      // Is modal open
+      const isModalOpen = (modal) => {
+        return modal.hasAttribute("open") && modal.getAttribute("open") != "false" ? true : false;
+      };
+      
+      // Open modal
+      const openModal = (modal) => {
+        if (isScrollbarVisible()) {
+          document.documentElement.style.setProperty("--scrollbar-width", `${getScrollbarWidth()}px`);
+        }
+        document.documentElement.classList.add(isOpenClass, openingClass);
+        setTimeout(() => {
+          visibleModal = modal;
+          document.documentElement.classList.remove(openingClass);
+        }, animationDuration);
+        modal.setAttribute("open", true);
+      };
+      
+      // Close modal
+      const closeModal = (modal) => {
+        visibleModal = null;
+        document.documentElement.classList.add(closingClass);
+        setTimeout(() => {
+          document.documentElement.classList.remove(closingClass, isOpenClass);
+          document.documentElement.style.removeProperty("--scrollbar-width");
+          modal.removeAttribute("open");
+        }, animationDuration);
+      };
+      
+      // Close with a click outside
+      document.addEventListener("click", (event) => {
+        if (visibleModal != null) {
+          const modalContent = visibleModal.querySelector("article");
+          const isClickInside = modalContent.contains(event.target);
+          !isClickInside && closeModal(visibleModal);
+        }
+      });
+      
+      // Close with Esc key
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && visibleModal != null) {
+          closeModal(visibleModal);
+        }
+      });
+      
+      // Get scrollbar width
+      const getScrollbarWidth = () => {
+        // Creating invisible container
+        const outer = document.createElement("div");
+        outer.style.visibility = "hidden";
+        outer.style.overflow = "scroll"; // forcing scrollbar to appear
+        outer.style.msOverflowStyle = "scrollbar"; // needed for WinJS apps
+        document.body.appendChild(outer);
+      
+        // Creating inner element and placing it in the container
+        const inner = document.createElement("div");
+        outer.appendChild(inner);
+      
+        // Calculating difference between container's full width and the child width
+        const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+      
+        // Removing temporary elements from the DOM
+        outer.parentNode.removeChild(outer);
+      
+        return scrollbarWidth;
+      };
+      
+      // Is scrollbar visible
+      const isScrollbarVisible = () => {
+        return document.body.scrollHeight > screen.height;
+      };
+    </script>
   </body>
 </html>
